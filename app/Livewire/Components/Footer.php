@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Livewire\Components;
+
+use App\Models\HomepageSetting;
+use App\Models\WebsiteSetting;
+use Livewire\Component;
+
+class Footer extends Component
+{
+    // Inside your NavMenu Livewire component
+    public function goToPage($page)
+    {
+        $this->emit('navigate', $page);
+    }
+
+    public function render()
+    {
+        return view('livewire.components.footer')->layout('layouts.app');
+    }
+}
