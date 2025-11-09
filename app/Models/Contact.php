@@ -9,7 +9,12 @@ class Contact extends Model
     //
 
     // add fillable
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'subject',
+        'message',
+    ];
     // add guaded
     protected $guarded = ['id'];
     // add hidden

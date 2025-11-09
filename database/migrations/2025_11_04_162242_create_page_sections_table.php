@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('page_sections', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('sub_title')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('image_align')->nullable();
+            $table->string('button_label')->nullable();
+            $table->text('button_link')->nullable();
+            $table->boolean('status')->default(true);
+            $table->boolean('homepage_featured')->default(true);
+            $table->integer('sort_by')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('page_sections');
+    }
+};

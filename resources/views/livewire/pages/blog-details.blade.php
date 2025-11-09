@@ -2,100 +2,49 @@
     {{$blog->name}}
 @endsection
 <div>
-    <!-- Page Header Start -->
-    <div class="page-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <!-- Page Header Box Start -->
-                    <div class="page-header-box">
-                        <h1 class="text-anime-style-3" data-cursor="-opaque">{{$blog->name}}</h1>
-                        <div class="text-center">
-                            <nav class="custom-breadcrumb wow fadeInUp">
-                                <a href="{{ route('home') }}" wire:navigate>Home</a>
-                                <span>/</span>
-                                <a href="{{ route('home.blog') }}" wire:navigate>Blog</a>
-                                <span>/</span>
-                                <span class="current">{{ $blog->name }}</span>
-                            </nav>
-                        </div>
+    <section class="py-12 sm:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-
-                        <style>
-                            .custom-breadcrumb {
-                                font-size: 14px;
-                                color: #666;
-                            }
-
-                            .custom-breadcrumb a {
-                                text-decoration: none;
-                                color: #ffffff;
-                                transition: color 0.3s;
-                            }
-
-                            .custom-breadcrumb a:hover {
-                                color: #ffffff;
-                            }
-
-                            .custom-breadcrumb span {
-                                color: #ffffff;
-                            }
-
-                            .custom-breadcrumb .current {
-                                font-weight: 600;
-                                color: #ffffff;
-                            }
-
-
-                        </style>
-
-                    </div>
-                    <!-- Page Header Box End -->
+            <div class="text-center mb-10">
+            <span class="text-sm font-semibold uppercase tracking-widest text-accent">
+                {{ $blog->category->name ?? 'Uncategorized' }}
+            </span>
+                <h1 class="text-4xl sm:text-5xl font-playfair font-bold text-primary mt-3 mb-4 leading-tight">
+                    {{ $blog->name }}
+                </h1>
+                <div class="flex justify-center items-center text-sm text-gray-500">
+                    <img src="{{ $blog->user->profile_photo_url ?? 'https://via.placeholder.com/40' }}" alt="Author Photo" class="w-8 h-8 rounded-full mr-3 object-cover">
+                    <span class="mr-3">{{ $blog->user->name ?? 'Anonymous' }}</span>
+                    <span>&bull;</span>
+                    <time class="ml-3" datetime="{{ $blog->created_at->format('Y-m-d') }}">
+                        {{ $blog->created_at->format('F d, Y') }}
+                    </time>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
 
-    <!-- Page Single Post Start -->
-    <div class="page-single-post">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-image">
-                            <img src="{{asset('storage/'.$blog->image)}}" alt="{{$blog->name}}">
+            @if($blog->image)
+                <figure class="mb-10 rounded-xl overflow-hidden shadow-2xl">
+                    <img class="w-full h-auto object-cover" src="{{ asset($blog->image) }}" alt="{{ $blog->name }}">
+                    @if($blog->description)
+                        <figcaption class="text-sm text-gray-500 p-2 text-center bg-gray-50">{{ $blog->description }}</figcaption>
+                    @endif
+                </figure>
+            @endif
 
-                    </div>
-                    <!-- Post Featured Image Start -->
+            <div class="article-content text-gray-700 text-lg">
+                {!! $blog->main_content !!}
+            </div>
 
-                    <!-- Post Single Content Start -->
-                    <div class="post-content">
-                        <!-- Post Entry Start -->
-                        <div class="post-entry">
-                            <div class="blog-header mb-4">
-                                <h2 class="text-3xl font-bold text-gray-900 mb-2 text-anime-style-3" data-cursor="-opaque">
-                                    {{ $blog->name }}
-                                </h2>
-                                <p class="text-sm text-gray-500">
-                                    <span class="mr-4"><strong>Created at:</strong> {{ $blog->created_at->format('d M Y H:i') }}</span>
-                                    <span class="mr-4"><strong>Author:</strong> {{ $blog->user->name }}</span>
-                                    <span><strong>Category:</strong> {{ $blog->category->name }}</span>
-                                </p>
-                            </div>
-
-                            <p class="wow fadeInUp">{!! $blog->description!!}</p>
-                            <p class="wow fadeInUp">{!! $blog->main_content!!}</p>
-
-
-
-                        </div>
-                        <!-- Post Entry End -->
-                    </div>
-                    <!-- Post Single Content End -->
+            <div class="mt-16 p-6 sm:p-8 bg-primary/5 rounded-xl border border-gray-200 flex flex-col sm:flex-row items-center">
+                <img src="{{ $blog->user->profile_photo_url ?? 'https://via.placeholder.com/80' }}" alt="{{ $blog->user->name ?? 'Author' }}" class="w-20 h-20 rounded-full object-cover mb-4 sm:mb-0 sm:mr-6">
+                <div class="text-center sm:text-left">
+                    <h4 class="text-xl font-playfair font-bold text-primary">Written by {{ $blog->user->name ?? 'Anonymous' }}</h4>
+                    <p class="text-sm text-gray-600 mt-1">
+                        {{ $blog->user->bio ?? 'Author biography is not available.' }}
+                    </p>
                 </div>
             </div>
+
         </div>
-    </div>
-    <!-- Page Single Post End -->
+    </section>
 </div>

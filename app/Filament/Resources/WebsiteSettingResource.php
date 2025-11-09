@@ -35,28 +35,26 @@ class WebsiteSettingResource extends Resource
                     Tabs::make('SettingsTabs')
                         ->tabs([
                             // Website Settings
-                            Tab::make('Website Logo & Map URL')
+                            Tab::make('Website Logo')
                                 ->schema([
+                                    TextInput::make('name')
+                                        ->label('Website Title')
+                                        ->maxLength(60)
+                                        ->placeholder('Enter homepage title for SEO'),
+
+
 
                                     Forms\Components\FileUpload::make('website_logo')
                                         ->image()
-                                        ->directory('uploads')
-                                        ->columnSpanFull(),
+                                        ->disk('uploads') // use your custom disk from config/filesystems.php
+                                        ->directory('')   // saves directly into public/uploads/
+                                        ->visibility('public'),
 
                                     Forms\Components\FileUpload::make('fav_icon')
                                         ->image()
-                                        ->directory('uploads')
-                                        ->columnSpanFull(),
-
-                                    Forms\Components\Textarea::make('map_link')
-                                        ->label('Please Give here your google map link')
-                                        ->columnSpanFull(),
-
-                                    Forms\Components\Textarea::make('map')
-                                        ->label('Please Give here your google map iframe')
-                                        ->columnSpanFull(),
-
-
+                                        ->disk('uploads') // use your custom disk from config/filesystems.php
+                                        ->directory('')   // saves directly into public/uploads/
+                                        ->visibility('public'),
 
                                 ]),
 
@@ -80,170 +78,7 @@ class WebsiteSettingResource extends Resource
                                 ]),
 
                             // 🎨 Color Settings
-                            Tab::make('Color Settings')
-                                ->schema([
-                                    // 🧭 Top Header Section
-                                    Forms\Components\Section::make('Top Header Menu')
-                                        ->description('Customize the colors for the website’s top header area.')
-                                        ->schema([
-                                            Forms\Components\ColorPicker::make('top_header_back')
-                                                ->label('Top Header Background Color')
-                                                ->columnSpanFull(),
 
-                                            Forms\Components\ColorPicker::make('top_header_text')
-                                                ->label('Top Header Text Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('top_header_text_hover')
-                                                ->label('Top Header Text Hover Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('top_header_button')
-                                                ->label('Top Header Button Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('top_header_button_hover')
-                                                ->label('Top Header Button Hover Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('top_header_button_text')
-                                                ->label('Top Header Button Text Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('top_header_button_text_hover')
-                                                ->label('Top Header Button Text Hover Color')
-                                                ->columnSpanFull(),
-                                        ])
-                                        ->collapsible()
-                                        ->collapsed(false)
-                                        ->columns(2),
-                                    // 📱 Mobile Navbar Colors Section
-                                    Forms\Components\Section::make('Mobile Navbar Colors')
-                                        ->description('Set colors for the mobile navigation bar and its menu items.')
-                                        ->schema([
-                                            Forms\Components\ColorPicker::make('navbar_back_color')
-                                                ->label('Navbar Background Color')
-                                                ->columnSpanFull(),
-
-
-                                            Forms\Components\ColorPicker::make('navbar_menu_text_color')
-                                                ->label('Menu Text Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('navbar_menu_text_hover_color')
-                                                ->label('Menu Text Hover Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('navbar_menu_mobile_text_color')
-                                                ->label('Mobile Menu Text Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('navbar_menu_mobile_text_hover_color')
-                                                ->label('Mobile Menu Text Hover Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('navbar_dropdown_back_color')
-                                                ->label('Navbar Dropdown Background Color')
-                                                ->columnSpanFull(),
-                                                Forms\Components\ColorPicker::make('navbar_icon_color')
-    ->label('Menu Icon (Hamburger) Color')
-    ->helperText('Change the color of the three-line menu icon on the navbar.')
-    ->columnSpanFull(),
-
-                                        ])
-                                        ->columns(2)
-                                        ->collapsible()
-                                        ->collapsed(false),
-
-
-                                    // 🔘 Primary Button Section
-                                    Forms\Components\Section::make('Primary Button')
-                                        ->description('Customize colors for the primary buttons across the site.')
-                                        ->schema([
-                                            Forms\Components\ColorPicker::make('primary_button_color')
-                                                ->label('Primary Button Background Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('primary_button_hover_color')
-                                                ->label('Primary Button Hover Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('primary_button_text_color')
-                                                ->label('Primary Button Text Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('primary_button_text_hover_color')
-                                                ->label('Primary Button Text Hover Color')
-                                                ->columnSpanFull(),
-                                        ])
-                                        ->collapsible()
-                                        ->collapsed(false)
-                                        ->columns(2),
-// 🟢 General Colors Section
-                                    Forms\Components\Section::make('General Colors')
-                                        ->description('Set the main theme colors for your site.')
-                                        ->schema([
-                                            Forms\Components\ColorPicker::make('primary_color')
-                                                ->label('Primary Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('secondary_color')
-                                                ->label('Secondary Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('text_color')
-                                                ->label('Text Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('accent_color')
-                                                ->label('Accent Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('white_color')
-                                                ->label('White Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('divider_color')
-                                                ->label('Divider Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('dark_divider_color')
-                                                ->label('Dark Divider Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('error_color')
-                                                ->label('Error Color')
-                                                ->columnSpanFull(),
-
-                                                 Forms\Components\ColorPicker::make('social_media_icon_color')
-                                                ->label('Social Media Icon Color')
-                                                ->columnSpanFull(),
-                                                   Forms\Components\ColorPicker::make('social_media_icon_back_color')
-                                                ->label('Social Media Icon Background Color')
-                                                ->columnSpanFull(),
-                                        ])
-                                        ->columns(2)
-                                        ->collapsible()
-                                        ->collapsed(false),
-
-                                    // ⚫ Footer Colors Section
-                                    Forms\Components\Section::make('Footer Colors')
-                                        ->description('Customize the background and text colors for the website footer.')
-                                        ->schema([
-                                            Forms\Components\ColorPicker::make('footer_back_color')
-                                                ->label('Footer Background Color')
-                                                ->columnSpanFull(),
-
-                                            Forms\Components\ColorPicker::make('footer_text_color')
-                                                ->label('Footer Text Color')
-                                                ->columnSpanFull(),
-                                        ])
-                                        ->columns(2)
-                                        ->collapsible()
-                                        ->collapsed(false),
-
-                                    // Optional: show two per row neatly
-                                ]),
 
                             Tab::make('Seo Settings')
                                 ->schema([
@@ -283,21 +118,6 @@ class WebsiteSettingResource extends Resource
                                         ->collapsible()
                                         ->collapsed(false),
 
-                                    Section::make('Service Page SEO')
-                                        ->schema([
-                                            TextInput::make('seo_service_title')
-                                                ->label('Meta Title')
-                                                ->maxLength(60),
-                                            Textarea::make('seo_service_description')
-                                                ->label('Meta Description')
-                                                ->rows(3)
-                                                ->maxLength(160),
-                                            TextInput::make('seo_service_keywords')
-                                                ->label('Meta Keywords'),
-
-                                        ])
-                                        ->collapsible()
-                                        ->collapsed(false),
 
                                     Section::make('Contact Page SEO')
                                         ->schema([

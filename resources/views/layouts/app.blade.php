@@ -29,73 +29,27 @@
         }
     </style>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('storage/'.$setting->fav_icon) }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('uploads/'.$setting->fav_icon) }}">
 
     @livewireStyles
 </head>
-<body>
+<body class="bg-[var(--color-background)] text-[var(--color-text)]">
 
 
 <!-- Your existing content -->
 @livewire('components.navbar')
-{{ $slot }}
+
+<main>
+    {{ $slot }}
+</main>
+
 @livewire('components.footer')
 
-<!-- Modal content remains the same -->
-<div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="appointmentModalLabel">Book Appointment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <!-- Modal Body with Form -->
-            <div class="modal-body">
-                <!-- Contact Form Start -->
-                <div class="contact-us-form">
-                    <!-- Section Title Start -->
-                    <div class="section-title">
-                        <h3 class="wow fadeInUp">get in touch</h3>
-
-                        <p class="wow fadeInUp" data-wow-delay="0.25s">We are happy to help you book an appointment or answer your questions. Please fill out our contact form and we will get back to you shortly!
-
-                        </p>
-                    </div>
-                    <!-- Section Title End -->
-                    @livewire('appointment-form')
-                </div>
-                <!-- Contact Form End -->
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-<!-- Optimized JS Loading -->
-<script src="{{asset('assets/js/jquery-3.7.1.min.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-
-<!-- Deferred Scripts -->
-<script src="{{asset('assets/js/validator.min.js')}}" defer></script>
-<script src="{{asset('assets/js/jquery.slicknav.js')}}" defer></script>
-<script src="{{asset('assets/js/swiper-bundle.min.js')}}" defer></script>
-<script src="{{asset('assets/js/jquery.waypoints.min.js')}}" defer></script>
-<script src="{{asset('assets/js/jquery.counterup.min.js')}}" defer></script>
-<script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}" defer></script>
-<script src="{{asset('assets/js/SmoothScroll.js')}}" defer></script>
-<script src="{{asset('assets/js/parallaxie.js')}}" defer></script>
-<script src="{{asset('assets/js/gsap.min.js')}}" defer></script>
-
-<script src="{{asset('assets/js/jquery.mb.YTPlayer.min.js')}}" defer></script>
-<script src="{{asset('assets/js/wow.js')}}" defer></script>
 
 @livewireScripts
 
-<script src="{{asset('assets/js/function.js')}}" defer></script>
+
 
 <!-- Show content once JS is ready -->
 <script>

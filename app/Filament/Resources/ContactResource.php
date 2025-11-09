@@ -31,8 +31,7 @@ class ContactResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
+                Forms\Components\TextInput::make('subject')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('message')
@@ -50,7 +49,9 @@ class ContactResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                Tables\Columns\TextColumn::make('subject')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('message')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

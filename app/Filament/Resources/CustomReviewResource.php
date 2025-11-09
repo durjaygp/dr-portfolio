@@ -20,6 +20,7 @@ class CustomReviewResource extends Resource
     protected static ?string $model = CustomReview::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {

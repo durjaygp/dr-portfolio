@@ -58,340 +58,73 @@
 
 
 <div>
-    <!-- Page Header Start -->
-    <div class="page-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <div class="page-header-box">
 
+    <section class="py-12 sm:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                        <h1 class="text-anime-style-3 text-center" data-cursor="-opaque">
-                            {{ $page->title }}
-                            <br>
-                            <span class="text-white" style="font-size: 1.25rem; font-weight: 400;">
-                                {{ $page->location }}
-                            </span>
-                        </h1>
-
-                        <div class="text-center">
-                            <nav class="custom-breadcrumb wow fadeInUp" aria-label="breadcrumb">
-                                <a href="{{ route('home') }}" wire:navigate>Home</a>
-                                <span>/</span>
-                                <a href="#">Pages</a>
-                                <span>/</span>
-                                <span class="current">{{ $page->title }}</span>
-                            </nav>
-                        </div>
-
-                        <style>
-                            .custom-breadcrumb {
-                                font-size: 14px;
-                                color: #ffffff;
-                            }
-                            .custom-breadcrumb a {
-                                text-decoration: none;
-                                color: #ffffff;
-                                transition: color 0.3s;
-                            }
-                            .custom-breadcrumb a:hover {
-                                color: #f1f1f1;
-                            }
-                            .custom-breadcrumb span {
-                                color: #ffffff;
-                            }
-                            .custom-breadcrumb .current {
-                                font-weight: 600;
-                                color: #f1f1f1;
-                            }
-                        </style>
-
-                    </div>
-                </div>
+            <div class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-playfair font-bold text-primary mt-3 mb-4 leading-tight">
+                    {{ $page->title }}
+                </h1>
             </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
 
-    <div class="about-us">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <!-- About Image Start -->
-                    <div class="about-image">
-                        <div class="about-img">
-                            <img src="{{asset('storage/app/public/'.$page->image)}}" alt="{{$page->title}}">
-                        </div>
-                    </div>
-                    <!-- About Image End -->
-                </div>
-                <div class="col-lg-6">
-                    <!-- About Us Content Start -->
-                    <div class="about-us-content">
-                        <!-- Section Title Start -->
-                        <div class="section-title">
-                            <h3 class="wow fadeInUp">Pages</h3>
-                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{$page->title}}</h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.25s">{{$page->description}}</p>
-                        </div>
-                        <!-- Section Title End -->
-                    </div>
-                    <!-- About Us Content End -->
-                </div>
-            </div>
-            <p class="service-entry mt-2">
-               {!! $page->main_content !!}
-            </p>
-        </div>
-    </div>
-
-    @php
-        // Make it a Laravel collection for easy sorting
-        $components = collect($page->components)->sortBy('sort_by');
-    @endphp
-
-    @foreach ($components as $component)
-        @if($component['type'] == "services")
-            @if($homepage->service_status === 1)
-                <!-- Our Service Section Start -->
-                <div class="our-service">
-                    <div class="container">
-                        <div class="row section-row">
-                            <div class="col-lg-12">
-                                <!-- Section Title Start -->
-                                <div class="section-title">
-                                    <h3 class="wow fadeInUp">{{$homepage->service_title}}</h3>
-                                    <h2 class="text-anime-style-3" data-cursor="-opaque">{{$homepage->service_header}}</h2>
-                                    <p class="wow fadeInUp" data-wow-delay="0.25s">{{$homepage->service_paragraph}}</p>
-                                </div>
-                                <!-- Section Title End -->
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            @foreach($services as $row)
-                                <div class="col-lg-3 col-md-6">
-                                    <!-- Services Item Start -->
-                                    <div class="service-item wow fadeInUp">
-                                        <div class="icon-box">
-                                            <img src="{{asset('storage/'.$row->icons)}}" alt="{{$row->name}}">
-                                        </div>
-                                        <div class="service-content">
-                                            <h3>{{$row->name}}</h3>
-                                            <p>{{\Illuminate\Support\Str::limit($row->description,80)}}</p>
-                                        </div>
-                                        <div class="service-btn">
-                                            <a href="{{route('service.details',$row->slug)}}" wire:navigate class="redmore-btn">learn more</a>
-                                        </div>
-                                    </div>
-                                    <!-- Services Item End -->
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <!-- Our Service Section End -->
-            @else
-
+            @if($page->image)
+                <figure class="mb-10 rounded-xl overflow-hidden shadow-2xl">
+                    <img class="w-full h-auto object-cover" src="{{ asset($page->image) }}" alt="{{ $page->title }}">
+                    @if($page->description)
+                        <figcaption class="text-sm text-gray-500 p-2 text-center bg-gray-50">{{ $page->description }}</figcaption>
+                    @endif
+                </figure>
             @endif
 
-        @else
+            <div class="article-content text-gray-700 text-lg">
+                {!! $page->main_content !!}
+            </div>
 
-        @endif
+        </div>
+    </section>
+    @foreach($pagesections as $index => $row)
+        @php
+            $bgColor = $index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+            $isImageLeft = $row->image_align == 1;
+            $sectionId = Str::slug($row->title, '-');
+        @endphp
 
-            @if($component['type'] == "faqs")
-                <div class="container">
-                    <div class="page-faqs-catagery">
-                        <div class="page-faq-accordion" id="general_information">
-                            <div class="faq-accordion-title">
-                                <h2 class="text-anime-style-3" data-cursor="-opaque">FAQs</h2>
-                            </div>
-
-                            <div class="page-faq-accordion" id="accordion">
-                                @foreach ($faqs as $index => $faq)
-                                    <div class="accordion-item wow fadeInUp" data-wow-delay="{{ $index * 0.25 }}s">
-                                        <h2 class="accordion-header" id="heading{{ $index }}">
-                                            <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapse{{ $index }}"
-                                                    aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
-                                                    aria-controls="collapse{{ $index }}">
-                                                {{ $faq->question }}
-                                            </button>
-                                        </h2>
-                                        <div id="collapse{{ $index }}"
-                                             class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
-                                             aria-labelledby="heading{{ $index }}"
-                                             data-bs-parent="#accordion">
-                                            <div class="accordion-body">
-                                                <p>{{ $faq->answer }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+        <section id="{{ $sectionId }}" class="py-20 {{ $bgColor }}">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-primary mb-4">{{ $row->title }}</h2>
+                    @if(!empty($row->sub_title))
+                        <p class="text-lg sm:text-xl text-gray-600">{{ $row->sub_title }}</p>
+                    @endif
                 </div>
 
-
-            @else
-
-            @endif
-
-            @if($component['type'] == "doctor")
-                    @if($homepage->team_status === 1)
-                        <!-- Our Team Section Start -->
-                        <div class="our-team">
-                            <div class="container">
-                                <div class="row section-row">
-                                    <div class="col-lg-12">
-                                        <!-- Section Title Start -->
-                                        <div class="section-title">
-                                            <h3 class="wow fadeInUp">{{$homepage->team_title}}</h3>
-                                            <h2 class="text-anime-style-3" data-cursor="-opaque">{{$homepage->team_header}}</h2>
-                                            <p class="wow fadeInUp" data-wow-delay="0.25s">{{$homepage->team_paragraph}}</p>
-                                        </div>
-                                        <!-- Section Title End -->
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center text-center">
-                                    @foreach($doctors as $row)
-                                        <div class="col-lg-3 col-md-6 d-flex justify-content-center">
-                                            <!-- Team Member Item Start -->
-                                            <div class="team-member-item wow fadeInUp">
-                                                <!-- Team Image Start -->
-                                                <div class="team-image">
-                                                    <figure class="image-anime">
-                                                        <img src="{{ asset('storage/'.$row->image) }}" alt="{{ $row->name }}">
-                                                    </figure>
-
-                                                    <!-- Team Social Icon Start -->
-                                                    <div class="team-social-icon">
-                                                        <ul>
-                                                            @if($row->facebook)
-                                                                <li><a href="{{ $row->facebook }}" target="_blank" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                                            @endif
-                                                            @if($row->twitter)
-                                                                <li><a href="{{ $row->twitter }}" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                                            @endif
-                                                            @if($row->linkedin)
-                                                                <li><a href="{{ $row->linkedin }}" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                                            @endif
-                                                            @if($row->instagram)
-                                                                <li><a href="{{ $row->instagram }}" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a></li>
-                                                            @endif
-                                                        </ul>
-                                                    </div>
-                                                    <!-- Team Social Icon End -->
-                                                </div>
-                                                <!-- Team Image End -->
-
-                                                <!-- Team Content Start -->
-                                                <div class="team-content">
-                                                    <h3>{{ $row->name }}</h3>
-                                                    <p>{{ $row->designation }}</p>
-                                                </div>
-                                                <!-- Team Content End -->
-                                            </div>
-                                            <!-- Team Member Item End -->
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- Our Team Section End -->
-                    @else
-
+                <div class="text-gray-800 leading-relaxed text-[1.1rem] sm:text-lg md:text-[1.125rem] font-normal max-w-none">
+                    @if(!empty($row->image))
+                        <img
+                            src="{{ asset('uploads/' . $row->image) }}"
+                            alt="{{ $row->title }}"
+                            class="rounded-xl shadow-2xl mb-6 w-full sm:w-1/2 md:w-2/5 lg:w-[38%]
+                        {{ $isImageLeft ? 'float-left mr-6 sm:mr-10' : 'float-right ml-6 sm:ml-10' }}"
+                        >
                     @endif
 
-            @else
+                    {!! $row->description !!}
 
-            @endif
-
-            @if($component['type'] == "review")
-                @if($homepage->testimonials_status === 1)
-                    <!-- Our Testimonial Section Start -->
-                    <div class="our-testimonials">
-                        <div class="container">
-                            <div class="row section-row">
-                                <div class="col-lg-12">
-                                    <!-- Section Title Start -->
-                                    <div class="section-title">
-                                        <h3 class="wow fadeInUp">{{$homepage->testimonials_title}}</h3>
-                                        <h2 class="text-anime-style-3" data-cursor="-opaque">{{$homepage->testimonials_header}}</h2>
-                                        <p class="wow fadeInUp" data-wow-delay="0.25s">{{$homepage->testimonials_paragraph}}</p>
-                                    </div>
-                                    <!-- Section Title End -->
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <!-- Testimonial Slider Start -->
-                                    <div class="testimonial-slider">
-                                        <div class="swiper">
-                                            <div class="swiper-wrapper">
-                                                @foreach($reviews as $row)
-                                                    <!-- Testimonial Slide Start -->
-                                                    <div class="swiper-slide">
-                                                        <div class="testimonial-item">
-                                                            <div class="testimonial-header">
-                                                                <div class="testimonial-quote">
-                                                                    <img src="{{asset('assets/images/icon-quote.svg')}}" alt="">
-                                                                </div>
-                                                                <div class="testimonial-content">
-                                                                    <p>{{$row->review}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="testimonial-body">
-                                                                <div class="author-image">
-                                                                    <figure class="image-anime">
-                                                                        @if(!empty($row->image) && \Storage::exists($row->image))
-                                                                            <img src="{{ asset('storage/'.$row->image) }}" alt="{{ $row->name }}">
-                                                                        @else
-                                                                            <div class="avatar-fallback" style="font-size: 30px !important;">
-                                                                                {{ strtoupper(substr($row->name, 0, 1)) }}
-                                                                            </div>
-                                                                        @endif
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="author-content">
-                                                                    <h3>{{ $row->name }}</h3>
-                                                                    <p>patient</p>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <!-- Testimonial Slide End -->
-                                                @endforeach
-
-                                            </div>
-                                            <!-- Testimonial Btn Start -->
-                                            <div class="testimonial-btn">
-                                                <div class="testimonial-button-prev"></div>
-                                                <div class="testimonial-button-next"></div>
-                                            </div>
-                                            <!-- Testimonial Btn End -->
-                                        </div>
-                                    </div>
-                                    <!-- Testimonial Slider End -->
-                                </div>
-                            </div>
+                    @if(!empty($row->button_label) && !empty($row->button_link))
+                        <div class="mt-8 clear-both text-center">
+                            <a href="{{ $row->button_link }}" target="_blank"
+                               class="inline-block px-8 py-3 text-lg font-semibold bg-primary text-white rounded-lg shadow hover:bg-primary/90 transition">
+                                {{ $row->button_label }}
+                            </a>
                         </div>
-                    </div>
-                    <!-- Our Testimonial Section End -->
-                @else
+                    @endif
 
-                @endif
-            @else
-
-            @endif
+                    <div class="clear-both"></div>
+                </div>
+            </div>
+        </section>
     @endforeach
-
-
 
 
 </div>

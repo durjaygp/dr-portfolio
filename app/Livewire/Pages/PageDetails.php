@@ -2,21 +2,32 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\CustomReview;
-use App\Models\Doctor;
-use App\Models\Faq;
-use Livewire\Component;
+use App\Models\PageSection;
 use App\Models\Pages as ModelsPages;
+use Livewire\Component;
 
 class PageDetails extends Component
 {
     public function render()
     {
         $page = ModelsPages::where('slug', request()->route('slug'))->firstOrFail();
-        $services = \App\Models\Service::whereStatus(1)->orderBy('name', 'asc')->take(8)->get();
-        $faqs = Faq::whereStatus(1)->get();
-        $reviews = CustomReview::latest()->whereStatus(1)->take(15)->get();
-        $doctors = Doctor::whereStatus(1)->take(8)->get();
-        return view('livewire.pages.page-details',compact('page','services','reviews','faqs','doctors'))->layout('layouts.app');
+
+        // It's already an array (from $casts)
+        $sectionData = $page->components ?? [];
+
+        $pagesections = collect($sectionData)
+            ->map(function ($item) {
+                $section = PageSection::find($item['type']);
+                if ($section) {
+                    $section->custom_sort = $item['sort_by'] ?? 0; // safe access
+                }
+                return $section;
+            })
+            ->filter()
+            ->sortBy('custom_sort')
+            ->values();
+
+        return view('livewire.pages.page-details', compact('page', 'pagesections'))
+            ->layout('layouts.app');
     }
 }

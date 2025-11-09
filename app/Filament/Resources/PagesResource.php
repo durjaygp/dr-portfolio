@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PagesResource\Pages;
 use App\Filament\Resources\PagesResource\RelationManagers;
 use App\Models\Pages as MainPages;
+use App\Models\PageSection;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -59,11 +60,13 @@ class PagesResource extends Resource
                         ->maxLength(255)
                         ->helperText('Auto-generated from title, but you can edit it.'),
 
-                    Forms\Components\TextInput::make('location'),
+
 
                     Forms\Components\FileUpload::make('image')
-                        ->directory('uploads')
-                        ->image(),
+                        ->image()
+                        ->disk('uploads') // use your custom disk from config/filesystems.php
+                        ->directory('')   // saves directly into public/uploads/
+                        ->visibility('public'),
 
                     Forms\Components\Textarea::make('description')
                         ->columnSpanFull(),
@@ -77,12 +80,7 @@ class PagesResource extends Resource
                         ->schema([
                             Forms\Components\Select::make('type')
                                 ->label('Component Type')
-                                ->options([
-                                    'faqs' => 'FAQs',
-                                    'services' => 'Services',
-                                    'review' => 'Review',
-                                    'doctor' => 'Doctor',
-                                ])
+                                ->options(PageSection::pluck('title', 'id')) // 👈 dynamically load options
                                 ->required()
                                 ->searchable(),
 

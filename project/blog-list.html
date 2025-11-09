@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Dr. Kimberly J. Shapkin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .bg-primary { background-color: #191970; } 
+        .text-primary { color: #191970; }
+        .bg-accent { background-color: #013220; } 
+        .text-accent { color: #013220; }
+        .hover\:bg-accent-dark:hover { background-color: #001f13; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-inter antialiased">
+
+    <header class="bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold font-playfair text-primary">Dr. Kimberly J. Shapkin</a>
+            <nav class="space-x-4">
+                <a href="index.html#blog" class="text-accent font-semibold hover:underline">Home</a>
+                <a href="#" class="text-gray-600 hover:text-accent transition">Blog</a>
+                <a href="terms.html" class="text-gray-600 hover:text-accent transition">Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="py-12 sm:py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl sm:text-5xl font-playfair font-bold text-primary mb-8 text-center">Insights & Publications</h1>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+
+                <div class="lg:col-span-3 space-y-10">
+
+                    <article class="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300">
+                        <a href="blog-detail.html">
+                            <img class="w-full h-64 object-cover" src="http://googleusercontent.com/image_collection/image_retrieval/8249434087143279068" alt="Featured Article Image">
+                        </a>
+                        <div class="p-6 sm:p-8">
+                            <span class="text-sm font-semibold uppercase tracking-wider text-accent">Brain Health</span>
+                            <h2 class="text-2xl sm:text-3xl font-playfair font-bold text-primary mt-2 mb-3 leading-snug hover:text-accent transition"><a href="blog-detail.html">The Metabolic Connection: Why Blood Sugar is the Key to Mental Fitness</a></h2>
+                            <p class="text-gray-600 mb-4">New research consistently highlights the profound link between metabolic health and cognitive function. This post breaks down the science of how insulin resistance impacts brain resilience and offers practical strategies for metabolic wellness...</p>
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="mr-3">Kimberly J. Shapkin</span>
+                                <span>&bull;</span>
+                                <time class="ml-3" datetime="2025-10-27">October 27, 2025</time>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-l-4 border-accent">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-primary">Menopause Care</span>
+                        <h3 class="text-xl font-playfair font-bold text-primary mt-2 mb-2 hover:text-accent transition"><a href="blog-detail.html">Navigating Midlife Transition: Hormonal Strategies for Resilience and Energy</a></h3>
+                        <p class="text-gray-600 text-sm mb-3">As a certified Menopause Society Practitioner, I discuss how targeted hormonal and lifestyle interventions can dramatically improve well-being during midlife and beyond.</p>
+                        <a href="blog-detail.html" class="text-sm font-semibold text-accent hover:underline">Continue Reading &rarr;</a>
+                    </article>
+
+                    <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-l-4 border-primary">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-primary">Academic Leadership</span>
+                        <h3 class="text-xl font-playfair font-bold text-primary mt-2 mb-2 hover:text-accent transition"><a href="blog-detail.html">Decolonizing the Curriculum: A Personal Reflection on Privilege and Practice</a></h3>
+                        <p class="text-gray-600 text-sm mb-3">Reflecting on my role as an educator and a third-generation white settler, I discuss the steps necessary to foster truly inclusive and equitable learning environments in advanced nursing practice.</p>
+                        <a href="blog-detail.html" class="text-sm font-semibold text-accent hover:underline">Continue Reading &rarr;</a>
+                    </article>
+
+                    <div class="flex justify-center pt-6">
+                        <a href="#" class="px-4 py-2 mx-1 text-primary bg-gray-200 rounded-md">1</a>
+                        <a href="#" class="px-4 py-2 mx-1 text-white bg-accent rounded-md hover:bg-accent-dark">2</a>
+                        <a href="#" class="px-4 py-2 mx-1 text-primary bg-gray-200 rounded-md">3</a>
+                    </div>
+                </div>
+
+                <aside class="hidden lg:block lg:col-span-1 space-y-8">
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
+                        <h4 class="text-xl font-playfair font-bold text-primary mb-4">Categories</h4>
+                        <ul class="space-y-3 text-gray-700">
+                            <li><a href="#" class="hover:text-accent transition">Brain Health (7)</a></li>
+                            <li><a href="#" class="hover:text-accent transition">Menopause & Midlife (5)</a></li>
+                            <li><a href="#" class="hover:text-accent transition">Academic Practice (4)</a></li>
+                            <li><a href="#" class="hover:text-accent transition">Research & Scholarship (6)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-accent">
+                        <h4 class="text-xl font-playfair font-bold text-primary mb-4">Recent Posts</h4>
+                        <ul class="space-y-4">
+                            <li class="border-b pb-3 border-gray-100 last:border-b-0 last:pb-0">
+                                <a href="blog-detail.html" class="text-sm font-semibold text-gray-700 hover:text-accent transition block">The Future of NP-Led Mental Health Clinics</a>
+                                <span class="text-xs text-gray-500">2 days ago</span>
+                            </li>
+                            <li class="border-b pb-3 border-gray-100 last:border-b-0 last:pb-0">
+                                <a href="blog-detail.html" class="text-sm font-semibold text-gray-700 hover:text-accent transition block">Integrative Medicine: Moving Beyond Silos</a>
+                                <span class="text-xs text-gray-500">1 week ago</span>
+                            </li>
+                            <li class="border-b pb-3 border-gray-100 last:border-b-0 last:pb-0">
+                                <a href="blog-detail.html" class="text-sm font-semibold text-gray-700 hover:text-accent transition block">Reflection on the CAON Annual Conference</a>
+                                <span class="text-xs text-gray-500">3 weeks ago</span>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white py-6 md:py-8 border-t border-accent/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <p class="mb-2 text-sm">Institutional Affiliation: Evolvewell Integrative Medicine Center</p>
+            <p class="text-xs">
+                &copy; <span id="year"></span> Dr. Kimberly J. Shapkin. All Rights Reserved. | 
+                <a href="terms.html" class="hover:text-accent transition">Terms & Conditions</a>
+            </p>
+        </div>
+        <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    </footer>
+</body>
+</html>

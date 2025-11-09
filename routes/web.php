@@ -13,7 +13,7 @@ use App\Livewire\Pages\Blog;
 use App\Livewire\Pages\BlogDetails;
 use App\Livewire\Pages\AboutUs;
 use App\Livewire\Pages\PageDetails;
-
+use App\Livewire\Pages\BlogList;
 
 
 Route::get('/', SpaRouter::class)->name('home');
@@ -22,6 +22,7 @@ Route::get('/contact-us', ContactUs::class)->name('home.contact');
 //Route::get('/about-us', AboutUs::class)->name('home.about');
 Route::get('/service/{slug}', ServiceDetails::class)->name('service.details');
 Route::get('/blog', Blog::class)->name('home.blog');
+Route::get('/blogs', BlogList::class)->name('blog.index');
 Route::get('/blog/{slug}', BlogDetails::class)->name('blog.details');
 
 Route::get('faq', function (){

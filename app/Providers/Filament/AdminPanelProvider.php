@@ -61,10 +61,10 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('/admin')
-            ->favicon(asset('fav.png'))
+            ->favicon(asset('1.jpg'))
 
             // 🟢 Add your sidebar logo image here:
-            ->brandLogo(asset('DentXpert.png')) // path to your logo file
+            ->brandLogo(asset('admin.png')) // path to your logo file
             ->brandLogoHeight('2rem') // adjust the height as needed
             ->brandName($setting->name) // optional text beside the logo
 
@@ -102,8 +102,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins(
                 $this->getPlugins()
-            )
-            ->databaseNotifications();
+            );
+           // ->databaseNotifications();
     }
 
 //    public function panel(Panel $panel): Panel
